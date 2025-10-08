@@ -1,0 +1,6 @@
+= Example of creating angular elements communicating with each other
+
+How to run:
+- clone the repo
+- run `npx ng build --output-hashing none` it shall build js files
+- run `npx http-server .` it shall run simple http server that loads simple html page hosting 2 components
