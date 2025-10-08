@@ -1,18 +1,23 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { App } from './app';
+import { NgModule, Injector } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
+import { CompAComponent } from './comp-a/comp-a';
+import { CompBComponent } from './comp-b/comp-b';
 
 @NgModule({
-  declarations: [
-    App
-  ],
   imports: [
     BrowserModule
   ],
-  providers: [
-    provideBrowserGlobalErrorListeners()
-  ],
-  bootstrap: [App]
+  providers: [],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) { }
+
+  ngDoBootstrap() {
+    const CompAElement = createCustomElement(CompAComponent, { injector: this.injector });
+    customElements.define('comp-a', CompAElement);
+
+    const CompBElement = createCustomElement(CompBComponent, { injector: this.injector });
+    customElements.define('comp-b', CompBElement);
+  }
+}
